@@ -48,7 +48,7 @@ export default function AboutProject() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
             >
-              Hi, I&apos;m{" "}
+              Hi, I'm{" "}
               <span className="text-cyan-400 font-bold animate-pulse">
                 {siteConfig.author.name}
               </span>{" "}
