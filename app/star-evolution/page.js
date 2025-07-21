@@ -257,7 +257,7 @@ export default function StarEvolution() {
           <li><b>Evolutionary Tracks:</b> Smooth interpolation between ZAMS, TAMS, and giant/supergiant phases</li>
         </ul>
         
-        <div className="text-xs text-cyan-400 mt-4">References: Prialnik, D. &quot;An Introduction to Stellar Astrophysics&quot;; Carroll & Ostlie, &quotAn Introduction to Modern Astrophysics&quot; ; Salaris & Cassisi, &quot;Evolution of Stars and Stellar Populations&quot;.</div>
+        <div className="text-xs text-cyan-400 mt-4">References: Prialnik, D. &quot;An Introduction to Stellar Astrophysics&quot;; Carroll & Ostlie, &quot;An Introduction to Modern Astrophysics&quot; ; Salaris & Cassisi, &quot;Evolution of Stars and Stellar Populations&quot;.</div>
       </div>
     </div>
   );
