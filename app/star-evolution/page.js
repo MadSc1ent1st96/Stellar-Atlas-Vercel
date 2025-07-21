@@ -240,10 +240,10 @@ export default function StarEvolution() {
       <div className="max-w-2xl w-full bg-black/70 rounded-xl shadow border border-cyan-700 p-6 text-cyan-200 text-base mb-10">
         <h2 className="text-xl font-bold text-cyan-300 mb-2">How this works</h2>
         <ul className="list-disc ml-6 mb-2">
-          <li><b>Mass</b> sets the star's initial properties using piecewise/interpolated empirical relations for ZAMS, TAMS, and giant/supergiant stages.</li>
+          <li><b>Mass</b> sets the star&apos;s initial properties using piecewise/interpolated empirical relations for ZAMS, TAMS, and giant/supergiant stages.</li>
           <li><b>Metallicity</b> (Z) affects temperature, color, and lifetime. Higher Z = cooler, redder, longer-lived (for low-mass). A very faint colored glow is shown for non-solar metallicity.</li>
-          <li><b>Age</b> is a percentage of the star's main sequence lifetime. The star's color, size, and position change smoothly as it evolves. The progress arc around the star shows its evolutionary stage.</li>
-          <li>The circular progress arc shows the star's evolutionary progress from birth to end-of-life, with color changes indicating different stages.</li>
+          <li><b>Age</b> is a percentage of the star&apos;s main sequence lifetime. The star&apos;s color, size, and position change smoothly as it evolves. The progress arc around the star shows its evolutionary stage.</li>
+          <li>The circular progress arc shows the star&apos;s evolutionary progress from birth to end-of-life, with color changes indicating different stages.</li>
           <li>All calculations are based on simple, widely used astrophysical scaling laws (not full MESA models). For more details, see the Atlas and Project Report pages.</li>
         </ul>
         
@@ -257,7 +257,7 @@ export default function StarEvolution() {
           <li><b>Evolutionary Tracks:</b> Smooth interpolation between ZAMS, TAMS, and giant/supergiant phases</li>
         </ul>
         
-        <div className="text-xs text-cyan-400 mt-4">References: Prialnik, D. "An Introduction to Stellar Astrophysics"; Carroll & Ostlie, "An Introduction to Modern Astrophysics"; Salaris & Cassisi, "Evolution of Stars and Stellar Populations".</div>
+        <div className="text-xs text-cyan-400 mt-4">References: Prialnik, D. &quot;An Introduction to Stellar Astrophysics&quot;; Carroll & Ostlie, &quotAn Introduction to Modern Astrophysics&quot; ; Salaris & Cassisi, &quot;Evolution of Stars and Stellar Populations&quot;.</div>
       </div>
     </div>
   );

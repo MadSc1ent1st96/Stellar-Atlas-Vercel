@@ -56,7 +56,7 @@ export default function ProjectReport() {
           )}
 
           <blockquote className="italic text-gray-400 border-l-4 border-cyan-400 pl-4">
-            "A journey through the lives of stars, visualized and decoded."
+            &quot;A journey through the lives of stars, visualized and decoded.&quot;
           </blockquote>
         </div>
       </div>

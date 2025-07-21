@@ -267,7 +267,7 @@ export default function Home() {
             className="max-w-3xl mx-auto text-center px-6 py-16 bg-gradient-to-br from-[#0b0f1a]/40 to-[#111827]/30 backdrop-blur-sm rounded-lg"
           >
             <blockquote className="italic text-gray-400 border-l-4 border-cyan-400 pl-4 text-left">
-              "To understand stars is to glimpse the engines of the universe."
+              &quot;To understand stars is to glimpse the engines of the universe.&quot;
             </blockquote>
             <p className="mt-6 text-gray-300">
               The full dataset is available on Zenodo:
