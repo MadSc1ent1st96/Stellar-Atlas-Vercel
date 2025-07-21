@@ -1,0 +1,25 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="48" height="48" rx="12" fill="#0b0f1a"/>
+  <text x="8" y="34" font-family="Inter, Segoe UI, sans-serif" font-size="28" font-weight="bold" fill="#06b6d4" filter="url(#glowTeal)">S</text>
+  <text x="24" y="34" font-family="Inter, Segoe UI, sans-serif" font-size="28" font-weight="bold" fill="#ff5e5b" filter="url(#glowRed)">A</text>
+  <defs>
+    <filter id="glowTeal" x="-10" y="-10" width="68" height="68">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feFlood flood-color="#06b6d4" result="color"/>
+      <feComposite in2="coloredBlur" in="color" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glowRed" x="-10" y="-10" width="68" height="68">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feFlood flood-color="#ff5e5b" result="color"/>
+      <feComposite in2="coloredBlur" in="color" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>

@@ -1,0 +1,20 @@
+{
+    "star_name": "020.00M_0.014Z_Stopping_Condn_h1_1d-5",
+    "initial_mass": 20.0,
+    "final_mass": 20.0,
+    "max_temperature_logK": 7.832913910461579,
+    "max_density_loggcm3": 1.421994569744787,
+    "termination_age": "9.80 million years",
+    "num_models": 468,
+    "graphs": [
+        "hr_diagram.png",
+        "Tc_vs_rhoc.png",
+        "age_vs_luminosity.png",
+        "age_vs_radius.png",
+        "central_H_vs_time.png"
+    ],
+    "videos": [
+        "TRho_evolution.mp4",
+        "hr_evolution.mp4"
+    ]
+}
