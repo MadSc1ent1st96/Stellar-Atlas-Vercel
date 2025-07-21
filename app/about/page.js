@@ -52,8 +52,8 @@ export default function AboutProject() {
               <span className="text-cyan-400 font-bold animate-pulse">
                 {siteConfig.author.name}
               </span>{" "}
-              — a 3rd-year BS-MS student at {siteConfig.author.institution}, passionate about
-              stars, simulations, and visual science communication. Visit my{" "}
+              — a 3rd-year BS-MS student at {siteConfig.author.institution}, interested about
+              stars, simulations among other things. Visit my{" "}
               <a
                 href={siteConfig.author.website}
                 target="_blank"
