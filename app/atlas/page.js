@@ -100,8 +100,6 @@ function DisplayImage({ title, src, markdown, explanation }) {
             className="w-full max-w-2xl sm:max-w-xl mx-auto rounded shadow-md"
             onLoad={handleImageLoad}
             onError={handleImageError}
-            onLoadStart={() => console.log('Image load started:', src)}
-            onLoadEnd={() => console.log('Image load ended:', src)}
             loading="lazy"
           />
           {isLoading && (
