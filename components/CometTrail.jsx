@@ -23,7 +23,7 @@ export default function CometTrail() {
         size: 2 + Math.random() * 2,
         opacity: 0.6 + Math.random() * 0.4,
         life: 0,
-        maxLife: 600 + Math.random() * 300,
+        maxLife: 600 + Math.random() * 20,
       };
     }
 
