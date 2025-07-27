@@ -10,6 +10,39 @@ import ConstellationReveal from '../../components/ConstellationReveal';
 import MouseTrail from '../../components/MouseTrail';
 import siteConfig from '../../site.config';
 
+// Utility function to check if device is mobile
+const isMobileDevice = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+
+// Utility function to check network status
+const useNetworkStatus = () => {
+  const [isOnline, setIsOnline] = useState(true);
+  const [connectionType, setConnectionType] = useState('unknown');
+
+  useEffect(() => {
+    const updateNetworkStatus = () => {
+      setIsOnline(navigator.onLine);
+      
+      if ('connection' in navigator) {
+        const connection = navigator.connection;
+        setConnectionType(connection.effectiveType || 'unknown');
+      }
+    };
+
+    updateNetworkStatus();
+    window.addEventListener('online', updateNetworkStatus);
+    window.addEventListener('offline', updateNetworkStatus);
+
+    return () => {
+      window.removeEventListener('online', updateNetworkStatus);
+      window.removeEventListener('offline', updateNetworkStatus);
+    };
+  }, []);
+
+  return { isOnline, connectionType };
+};
+
 const stopGroups = ['Hydrogen-Exhaustion', 'Helium-Exhaustion'];
 const sections = ['Project Overview', 'ZAMS Plot', 'Star Simulations'];
 const zGroups = [
@@ -25,22 +58,79 @@ const exampleMasses = ['1Msun', '20Msun', '50Msun'];
 
 function DisplayImage({ title, src, markdown, explanation }) {
   const [imgError, setImgError] = useState(false);
-  useEffect(() => { setImgError(false); }, [src]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const { isOnline, connectionType } = useNetworkStatus();
+
+  useEffect(() => { 
+    setImgError(false); 
+    setIsLoading(true);
+    setIsMobile(isMobileDevice());
+    
+    // Add a timeout to prevent infinite loading
+    const timeout = setTimeout(() => {
+      if (isLoading) {
+        console.log('Image loading timeout for:', src);
+        setIsLoading(false);
+      }
+    }, 5000); // 5 second timeout
+    
+    return () => clearTimeout(timeout);
+  }, [src]);
+
+  const handleImageLoad = () => {
+    console.log('Image loaded successfully:', src);
+    setIsLoading(false);
+  };
+
+  const handleImageError = () => {
+    console.error('Image loading error for:', src);
+    setImgError(true);
+    setIsLoading(false);
+  };
+
   return (
     <div className="my-10 text-center">
       <h3 className="text-lg sm:text-xl font-semibold mb-2 text-cyan-300">{title}</h3>
       {!imgError ? (
-        <img
-          src={src}
-          alt={title}
-          className="w-full max-w-2xl sm:max-w-xl mx-auto rounded shadow-md"
-          onError={() => setImgError(true)}
-        />
-      ) : (
-        <div className="w-full max-w-2xl sm:max-w-xl mx-auto rounded shadow-md bg-gray-800 flex items-center justify-center h-64">
-          <span className="text-gray-400">Image not available</span>
+        <div className="relative">
+          <img
+            src={src}
+            alt={title}
+            className="w-full max-w-2xl sm:max-w-xl mx-auto rounded shadow-md"
+            onLoad={handleImageLoad}
+            onError={handleImageError}
+            onLoadStart={() => console.log('Image load started:', src)}
+            onLoadEnd={() => console.log('Image load ended:', src)}
+            loading="lazy"
+          />
+          {isLoading && (
+            <div className="absolute inset-0 w-full max-w-2xl sm:max-w-xl mx-auto rounded shadow-md bg-gray-800 flex items-center justify-center">
+              <div className="flex flex-col items-center space-y-2">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400"></div>
+                <span className="text-gray-400 text-sm">Loading image...</span>
+              </div>
+            </div>
+          )}
         </div>
-      )}
+              ) : (
+          <div className="w-full max-w-2xl sm:max-w-xl mx-auto rounded shadow-md bg-gray-800 flex items-center justify-center h-64">
+            <div className="text-center">
+              <span className="text-gray-400 block mb-2">Image not available</span>
+              {isMobile && (
+                <div className="text-gray-500 text-sm space-y-1">
+                  <span className="block">Try refreshing the page</span>
+                  {!isOnline && (
+                    <span className="block text-red-400">You appear to be offline</span>
+                  )}
+                  {connectionType === 'slow-2g' || connectionType === '2g' && (
+                    <span className="block text-yellow-400">Slow connection detected</span>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       {explanation && (
         <div className="prose prose-invert text-left mx-auto max-w-2xl mt-4">
           <p className="text-gray-300">{explanation}</p>
@@ -53,24 +143,95 @@ function DisplayImage({ title, src, markdown, explanation }) {
 
 function DisplayVideo({ title, src, explanation }) {
   const [videoError, setVideoError] = useState(false);
-  useEffect(() => { setVideoError(false); }, [src]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const { isOnline, connectionType } = useNetworkStatus();
+
+  useEffect(() => { 
+    setVideoError(false); 
+    setIsLoading(true);
+    setIsMobile(isMobileDevice());
+    
+    // On mobile, delay video loading to improve initial page load
+    if (isMobileDevice()) {
+      const timer = setTimeout(() => setShouldLoadVideo(true), 1000);
+      return () => clearTimeout(timer);
+    } else {
+      setShouldLoadVideo(true);
+    }
+  }, [src]);
+
+  const handleVideoLoad = () => {
+    setIsLoading(false);
+  };
+
+  const handleVideoError = (error) => {
+    console.error('Video loading error:', error);
+    setVideoError(true);
+    setIsLoading(false);
+  };
+
+  const handleLoadVideo = () => {
+    if (isMobile && !shouldLoadVideo) {
+      setShouldLoadVideo(true);
+    }
+  };
+
   return (
     <div className="my-10 text-center">
       <h3 className="text-lg sm:text-xl font-semibold mb-2 text-cyan-300">{title}</h3>
       {!videoError ? (
-        <video
-          key={src}
-          controls
-          className="w-full max-w-2xl sm:max-w-xl mx-auto rounded shadow-md"
-          onError={() => setVideoError(true)}
-        >
-        <source src={src} type="video/mp4" />
-      </video>
-      ) : (
-        <div className="w-full max-w-2xl sm:max-w-xl mx-auto rounded shadow-md bg-gray-800 flex items-center justify-center h-64">
-          <span className="text-gray-400">Video not available</span>
+        <div className="relative">
+          {isLoading && (
+            <div 
+              className="w-full max-w-2xl sm:max-w-xl mx-auto rounded shadow-md bg-gray-800 flex items-center justify-center h-64 cursor-pointer"
+              onClick={handleLoadVideo}
+            >
+              <div className="flex flex-col items-center space-y-2">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400"></div>
+                <span className="text-gray-400 text-sm">
+                  {isMobile && !shouldLoadVideo ? 'Tap to load video...' : 'Loading video...'}
+                </span>
+              </div>
+            </div>
+          )}
+          {(shouldLoadVideo || !isMobile) && (
+            <video
+              key={src}
+              controls
+              preload="metadata"
+              playsInline
+              className={`w-full max-w-2xl sm:max-w-xl mx-auto rounded shadow-md ${isLoading ? 'hidden' : ''}`}
+              onLoadStart={handleVideoLoad}
+              onCanPlay={handleVideoLoad}
+              onError={handleVideoError}
+              onLoadedData={handleVideoLoad}
+            >
+              <source src={src} type="video/mp4" />
+              <source src={src} type="video/webm" />
+              Your browser does not support the video tag.
+            </video>
+          )}
         </div>
-      )}
+              ) : (
+          <div className="w-full max-w-2xl sm:max-w-xl mx-auto rounded shadow-md bg-gray-800 flex items-center justify-center h-64">
+            <div className="text-center">
+              <span className="text-gray-400 block mb-2">Video not available</span>
+              {isMobile && (
+                <div className="text-gray-500 text-sm space-y-1">
+                  <span className="block">Try refreshing the page</span>
+                  {!isOnline && (
+                    <span className="block text-red-400">You appear to be offline</span>
+                  )}
+                  {connectionType === 'slow-2g' || connectionType === '2g' && (
+                    <span className="block text-yellow-400">Slow connection detected</span>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       {explanation && (
         <div className="prose prose-invert text-left mx-auto max-w-2xl mt-4">
           <p className="text-gray-300">{explanation}</p>
@@ -408,6 +569,8 @@ export default function Atlas() {
   const [currentSection, setCurrentSection] = useState('Project Overview');
   const [currentZGroup, setCurrentZGroup] = useState('Z = 0.0001');
   const [currentMass, setCurrentMass] = useState('1Msun');
+  const { isOnline, connectionType } = useNetworkStatus();
+  const isMobile = isMobileDevice();
 
   // Get content based on selections
   const overviewContent = markdownContent[currentStopGroup];
@@ -428,6 +591,18 @@ export default function Atlas() {
     }
   }
 
+  // Debug logging for mobile issues
+  useEffect(() => {
+    if (isMobile && currentSection === 'Star Simulations' && currentZGroup === 'Z = 0.014') {
+      console.log('Mobile Debug - Z = 0.014:', {
+        stopGroup: currentStopGroup,
+        zGroup: currentZGroup,
+        itemCount: starSimItems.length,
+        items: starSimItems.map(item => ({ title: item.title, type: item.type, src: item.src }))
+      });
+    }
+  }, [currentStopGroup, currentSection, currentZGroup, starSimItems.length, isMobile]);
+
   return (
     <PageWrapper>
       <div className="min-h-screen bg-[#0b0f1a] text-white relative overflow-x-hidden">
@@ -447,6 +622,38 @@ export default function Atlas() {
               delaySpeed={1000}
           />
         </h1>
+
+          {/* Network Status Indicator for Mobile */}
+          {isMobile && (
+            <div className="text-center mb-4 space-y-2">
+              <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                isOnline 
+                  ? connectionType === 'slow-2g' || connectionType === '2g'
+                    ? 'bg-yellow-900 text-yellow-200'
+                    : 'bg-green-900 text-green-200'
+                  : 'bg-red-900 text-red-200'
+              }`}>
+                <div className={`w-2 h-2 rounded-full mr-2 ${
+                  isOnline 
+                    ? connectionType === 'slow-2g' || connectionType === '2g'
+                      ? 'bg-yellow-400'
+                      : 'bg-green-400'
+                    : 'bg-red-400'
+                }`}></div>
+                {isOnline 
+                  ? connectionType === 'slow-2g' || connectionType === '2g'
+                    ? 'Slow Connection'
+                    : 'Online'
+                  : 'Offline'
+                }
+              </div>
+              {currentSection === 'Star Simulations' && (
+                <div className="text-yellow-400 text-xs bg-yellow-900/20 px-3 py-1 rounded">
+                  ⚠️ Videos are large files. Loading may take time on slow connections.
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Navigation Dropdowns */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
