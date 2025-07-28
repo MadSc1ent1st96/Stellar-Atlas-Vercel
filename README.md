@@ -5,7 +5,7 @@ A personal astrophysics project by **Aniket Mishra** (BS-MS, **IISER Kolkata**) 
 ---
 
 ## 🚀 Live Demo
-- **Vercel Deployment**: [Coming Soon]
+- **Vercel Deployment**: [GO!!](https://stellar-atlas.vercel.app/)
 - **Previous Streamlit Version**: [🔗 Live Demo](https://madsc1ent1st96-stellar-atlas.streamlit.app/)
 
 ---
