@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it using the metadata below."
+title: "Stellar Atlas: A Comprehensive Stellar Evolution Simulation Dataset"
+doi: 10.5281/zenodo.16727759
+version: "1.0"
+date-released: 2025-08-02
+authors:
+  - family-names: Mishra
+    given-names: Aniket
+    orcid: "https://orcid.org/0009-0007-1998-6227"
+    affiliation: "Indian Institute of Science Education and Research (IISER) Kolkata"
+
+repository-code: "https://github.com/MadSc1ent1st96/Stellar-Atlas"
+url: "https://stellar-atlas.vercel.app/"
+keywords:
+  - Stellar Evolution
+  - MESA
+  - HR Diagram
+  - ZAMS
+  - Gaia DR3
+  - Helium Exhaustion
+  - Metallicity
+  - High Mass Stars
+  - Population Synthesis
+  - Astrophysics
+
+license: CC-BY-4.0 for dataset and MIT for codes
+abstract: >
+  Stellar Atlas is a detailed stellar evolution database generated using the MESA
+  (Modules for Experiments in Stellar Astrophysics) code. It covers over 2350 simulations
+  across a wide range of stellar masses (0.5 to 900 M☉) and metallicities (Z = 0.0001 to 0.04),
+  capturing hydrogen and helium exhaustion phases. The dataset includes HR diagrams,
+  core diagnostic plots, ZAMS analysis, Gaia DR3 comparison, batch scripting tools, 
+  and plotting utilities. Ideal for theoretical research, education, and code-based
+  comparison with observational data.
