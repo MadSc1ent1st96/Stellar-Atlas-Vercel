@@ -98,7 +98,7 @@ stellar-atlas-vercel-Gen/
 
 ## 📊 Dataset
 The full dataset (~2350 simulations) is available on Zenodo:
-- **DOI**: [YOUR DOI HERE]
+- **DOI**: [10.5281/zenodo.16727759)]
 - **Community**: [Zenodo MESA Community](https://zenodo.org/communities/mesa/records)
 
 ---
