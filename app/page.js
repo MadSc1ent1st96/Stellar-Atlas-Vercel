@@ -273,7 +273,7 @@ export default function Home() {
               The full dataset is available on Zenodo:
             </p>
             <a
-              href="https://doi.org/10.5281/zenodo.15571157"
+              href="https://doi.org/10.5281/zenodo.16727759"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 inline-block text-cyan-400 underline hover:text-cyan-200 transition"

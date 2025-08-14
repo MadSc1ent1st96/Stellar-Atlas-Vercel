@@ -136,7 +136,7 @@ export default function AboutProject() {
                 The full dataset (~2350 simulations) is archived at:
                 <br />
                 <a
-                  href="https://zenodo.org/communities/mesa/records"
+                  href="https://doi.org/10.5281/zenodo.16727759"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-cyan-400 underline hover:text-cyan-200"
@@ -247,7 +247,7 @@ export default function AboutProject() {
                 </a>{" "}
                 or check out the{" "}
                 <a
-                  href="https://zenodo.org/communities/mesa/records"
+                  href="https://doi.org/10.5281/zenodo.16727759"
                   className="text-cyan-400 underline hover:text-cyan-300"
                   target="_blank"
                   rel="noopener noreferrer"
