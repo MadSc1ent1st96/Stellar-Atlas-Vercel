@@ -102,7 +102,7 @@ export default function ClientHeader() {
               whileTap={{ scale: 0.98 }}
             >
               <a
-                href={siteConfig.social?.dataset || 'https://zenodo.org'}
+                href={siteConfig.social?.dataset || 'https://doi.org/10.5281/zenodo.16727759'}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-4 py-2 text-sm font-medium text-cyan-300 bg-gray-800 hover:bg-gray-700 border border-cyan-500/50 hover:border-cyan-400/70 rounded-md transition-all duration-200 shadow-sm hover:shadow-cyan-500/20"
