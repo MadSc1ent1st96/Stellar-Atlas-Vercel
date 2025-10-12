@@ -177,7 +177,7 @@ export default function ClientHeader() {
                   transition={{ duration: 0.2 }}
                 >
                   <a
-                    href={siteConfig.social?.dataset || 'https://zenodo.org'}
+                    href={siteConfig.social?.dataset || 'https://doi.org/10.5281/zenodo.16727759'}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setMenuOpen(false)}
